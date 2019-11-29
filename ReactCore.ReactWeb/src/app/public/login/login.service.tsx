@@ -1,5 +1,5 @@
-import { ServiceClient } from '../common/services/service_client.service';
-import { ApiResponse } from '../common/models/api_response.model';
+import { ServiceClient } from '../../common/services/service_client.service';
+import { ApiResponse } from '../../common/models/api_response.model';
 
 import { LoginRequestDto } from './login.model';
 

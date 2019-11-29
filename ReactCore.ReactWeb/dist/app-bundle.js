@@ -98,15 +98,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+var PublicRoute_1 = __webpack_require__(/*! ./src/app/common/component/route/PublicRoute */ "./src/app/common/component/route/PublicRoute.tsx");
+var PublicRoute_Component_1 = __webpack_require__(/*! ./src/app/common/component/route/PublicRoute.Component */ "./src/app/common/component/route/PublicRoute.Component.tsx");
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 __webpack_require__(/*! bootstrap/dist/css/bootstrap.css */ "./node_modules/bootstrap/dist/css/bootstrap.css");
 var home_1 = __webpack_require__(/*! ./src/app/home */ "./src/app/home.tsx");
-var login_component_1 = __webpack_require__(/*! ./src/app/login/login.component */ "./src/app/login/login.component.tsx");
+var login_component_1 = __webpack_require__(/*! ./src/app/public/login/login.component */ "./src/app/public/login/login.component.tsx");
 var App = function () {
     return (React.createElement(react_router_dom_1.BrowserRouter, null,
         React.createElement(react_router_dom_1.Switch, null,
             React.createElement(react_router_dom_1.Route, { path: "/", component: home_1.default, exact: true }),
             React.createElement(react_router_dom_1.Route, { path: "/login", component: login_component_1.default, exact: true }),
+            React.createElement(PublicRoute_1.default, { path: "", component: PublicRoute_Component_1.default }),
             React.createElement(react_router_dom_1.Redirect, { to: "/" }))));
 };
 ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
@@ -9746,19 +9749,19 @@ exports.push([module.i, "/*!\n * Bootstrap v4.3.1 (https://getbootstrap.com/)\n 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js!./src/app/login/login.component.css":
-/*!*****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ref--6-1!./node_modules/postcss-loader/src??postcss!./node_modules/sass-loader/dist/cjs.js!./src/app/login/login.component.css ***!
-  \*****************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js!./src/app/public/login/login.component.css":
+/*!************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ref--6-1!./node_modules/postcss-loader/src??postcss!./node_modules/sass-loader/dist/cjs.js!./src/app/public/login/login.component.css ***!
+  \************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "._1XcMTLDX2ky8RiPzAWUJ41{color:DodgerBlue}\n", ""]);
+exports.push([module.i, "._225s-OVzyV3wMaOSsFhy0z{color:DodgerBlue}\n", ""]);
 // Exports
 exports.locals = {
-	"loginblue": "_1XcMTLDX2ky8RiPzAWUJ41"
+	"loginblue": "_225s-OVzyV3wMaOSsFhy0z"
 };
 
 /***/ }),
@@ -79246,6 +79249,118 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./src/app/common/component/route/PublicRoute.Component.tsx":
+/*!******************************************************************!*\
+  !*** ./src/app/common/component/route/PublicRoute.Component.tsx ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+var about_us_component_1 = __webpack_require__(/*! ../../../public/about-us/about-us.component */ "./src/app/public/about-us/about-us.component.tsx");
+var _404_component_1 = __webpack_require__(/*! ../../../public/error/404.component */ "./src/app/public/error/404.component.tsx");
+var PublicRouteComponent = /** @class */ (function (_super) {
+    __extends(PublicRouteComponent, _super);
+    function PublicRouteComponent(props) {
+        var _this = _super.call(this, props) || this;
+        console.log('pcompo', props);
+        return _this;
+    }
+    PublicRouteComponent.prototype.render = function () {
+        return (React.createElement(react_router_dom_1.Switch, null,
+            React.createElement(react_router_dom_1.Route, { path: this.props.match.path + "about-us", exact: true, component: about_us_component_1.default }),
+            React.createElement(react_router_dom_1.Route, { path: this.props.match.path + ":publicPage", exact: true, component: _404_component_1.default })));
+    };
+    return PublicRouteComponent;
+}(React.Component));
+exports.default = PublicRouteComponent;
+
+
+/***/ }),
+
+/***/ "./src/app/common/component/route/PublicRoute.tsx":
+/*!********************************************************!*\
+  !*** ./src/app/common/component/route/PublicRoute.tsx ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+            t[p[i]] = s[p[i]];
+    return t;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+var PublicRoute = /** @class */ (function (_super) {
+    __extends(PublicRoute, _super);
+    function PublicRoute(props) {
+        var _this = _super.call(this, props) || this;
+        console.log(props);
+        return _this;
+    }
+    PublicRoute.prototype.render = function () {
+        var _a = this.props, Component = _a.component, rest = __rest(_a, ["component"]);
+        return (React.createElement(React.Fragment, null,
+            React.createElement(react_router_dom_1.Route, __assign({}, rest, { render: function (props) {
+                    return React.createElement(Component, __assign({}, props));
+                } }))));
+    };
+    return PublicRoute;
+}(React.Component));
+exports.default = PublicRoute;
+
+
+/***/ }),
+
 /***/ "./src/app/common/constants/service_provider_const.tsx":
 /*!*************************************************************!*\
   !*** ./src/app/common/constants/service_provider_const.tsx ***!
@@ -79376,14 +79491,92 @@ exports.default = Home;
 
 /***/ }),
 
-/***/ "./src/app/login/login.component.css":
-/*!*******************************************!*\
-  !*** ./src/app/login/login.component.css ***!
-  \*******************************************/
+/***/ "./src/app/public/about-us/about-us.component.tsx":
+/*!********************************************************!*\
+  !*** ./src/app/public/about-us/about-us.component.tsx ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js??ref--6-1!../../../node_modules/postcss-loader/src??postcss!../../../node_modules/sass-loader/dist/cjs.js!./login.component.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js!./src/app/login/login.component.css");
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var AboutUs = /** @class */ (function (_super) {
+    __extends(AboutUs, _super);
+    function AboutUs() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    AboutUs.prototype.render = function () {
+        return (React.createElement("div", null, "AboutUs"));
+    };
+    return AboutUs;
+}(React.Component));
+exports.default = AboutUs;
+
+
+/***/ }),
+
+/***/ "./src/app/public/error/404.component.tsx":
+/*!************************************************!*\
+  !*** ./src/app/public/error/404.component.tsx ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var Error404 = /** @class */ (function (_super) {
+    __extends(Error404, _super);
+    function Error404() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Error404.prototype.render = function () {
+        return (React.createElement("h4", null, "404 Page not found"));
+    };
+    return Error404;
+}(React.Component));
+exports.default = Error404;
+
+
+/***/ }),
+
+/***/ "./src/app/public/login/login.component.css":
+/*!**************************************************!*\
+  !*** ./src/app/public/login/login.component.css ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js??ref--6-1!../../../../node_modules/postcss-loader/src??postcss!../../../../node_modules/sass-loader/dist/cjs.js!./login.component.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js!./src/app/public/login/login.component.css");
 
 if (typeof content === 'string') {
   content = [[module.i, content, '']];
@@ -79394,7 +79587,7 @@ var options = {}
 options.insert = "head";
 options.singleton = false;
 
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js")(content, options);
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js")(content, options);
 
 if (content.locals) {
   module.exports = content.locals;
@@ -79403,10 +79596,10 @@ if (content.locals) {
 
 /***/ }),
 
-/***/ "./src/app/login/login.component.tsx":
-/*!*******************************************!*\
-  !*** ./src/app/login/login.component.tsx ***!
-  \*******************************************/
+/***/ "./src/app/public/login/login.component.tsx":
+/*!**************************************************!*\
+  !*** ./src/app/public/login/login.component.tsx ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -79433,8 +79626,8 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 var availity_reactstrap_validation_1 = __webpack_require__(/*! availity-reactstrap-validation */ "./node_modules/availity-reactstrap-validation/lib/index.js");
 var reactstrap_1 = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.es.js");
 //module
-var styles = __webpack_require__(/*! ./login.component.css */ "./src/app/login/login.component.css");
-var login_service_1 = __webpack_require__(/*! ./login.service */ "./src/app/login/login.service.tsx");
+var styles = __webpack_require__(/*! ./login.component.css */ "./src/app/public/login/login.component.css");
+var login_service_1 = __webpack_require__(/*! ./login.service */ "./src/app/public/login/login.service.tsx");
 var Login = /** @class */ (function (_super) {
     __extends(Login, _super);
     function Login(props) {
@@ -79475,7 +79668,12 @@ var Login = /** @class */ (function (_super) {
                                 maxLength: { value: 16, errorMessage: 'Your name must be between 6 and 16 characters' }
                             } }),
                         React.createElement(reactstrap_1.Button, { color: "primary" }, "Login")),
-                    React.createElement(react_router_dom_1.Link, { to: "/home" }, "Go back to Home page")))));
+                    React.createElement("hr", null),
+                    React.createElement(react_router_dom_1.Link, { to: "/" }, "Home page"),
+                    React.createElement("br", null),
+                    React.createElement(react_router_dom_1.Link, { to: "/about-us" }, "About-us"),
+                    React.createElement("br", null),
+                    React.createElement(react_router_dom_1.Link, { to: "/contact-us" }, "Contact-us")))));
     };
     return Login;
 }(React.Component));
@@ -79484,17 +79682,17 @@ exports.default = Login;
 
 /***/ }),
 
-/***/ "./src/app/login/login.service.tsx":
-/*!*****************************************!*\
-  !*** ./src/app/login/login.service.tsx ***!
-  \*****************************************/
+/***/ "./src/app/public/login/login.service.tsx":
+/*!************************************************!*\
+  !*** ./src/app/public/login/login.service.tsx ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var service_client_service_1 = __webpack_require__(/*! ../common/services/service_client.service */ "./src/app/common/services/service_client.service.tsx");
+var service_client_service_1 = __webpack_require__(/*! ../../common/services/service_client.service */ "./src/app/common/services/service_client.service.tsx");
 var LoginService = /** @class */ (function () {
     function LoginService() {
         this.serviceRoute = 'login/';

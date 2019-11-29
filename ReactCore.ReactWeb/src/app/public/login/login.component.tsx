@@ -8,7 +8,7 @@ import { AvForm, AvField, AvGroup, AvInput, AvFeedback, AvRadioGroup, AvRadio } 
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 //common
-import { ApiResponse } from '../common/models/api_response.model';
+import { ApiResponse } from '../../common/models/api_response.model';
 
 //module
 import * as styles from './login.component.css';
@@ -76,8 +76,13 @@ class Login extends React.Component<any, any> {
                             }} />
                             <Button color="primary">Login</Button>
                         </AvForm>
+                        <hr/>
 
-                        <Link to="/home">Go back to Home page</Link>
+                        <Link to="/">Home page</Link>
+                        <br/>
+                        <Link to="/about-us" >About-us</Link>
+                        <br />
+                        <Link to="/contact-us">Contact-us</Link>
                     </div>
 
                 </div>
