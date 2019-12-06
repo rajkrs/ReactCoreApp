@@ -10,8 +10,9 @@ namespace ReactCore.Api.Core.Models
     public class ActionResponse<T>
     {
         public ResponseStatus Status { get; set; }
-        public List<Message> Messages  { get; set; }
+        public List<Message> Messages { get; set; }
         public T Data { get; set; }
+
     }
 
 }

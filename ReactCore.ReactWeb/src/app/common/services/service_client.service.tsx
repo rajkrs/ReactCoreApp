@@ -66,11 +66,45 @@ export class ServiceClient {
             }
             else {
                 // handle error
+                console.log('error in Get,', thrown.message);
+
             }
         });
 
  
      }
+
+
+
+
+
+    Post(url: string, requestBody: any, requiredToken: boolean = true) {
+        if (requiredToken) {
+            // this.interceptAuthentication();
+        }
+
+
+        return this.client.post(url, requestBody, {
+            cancelToken: this.request.token
+        })
+            .then(response => {
+                //console.log(response.data);
+                return response.data;
+            })
+            .catch(function (thrown) {
+                if (axios.isCancel(thrown)) {
+                    console.log('request canceled', thrown.message);
+                }
+                else {
+                    // handle error
+                    console.log('error in Post,', thrown.message);
+                }
+            });
+
+
+    }
+
+
 
     Kill() {
         this.request.cancel('Operation canceled by the user.');

@@ -7,7 +7,6 @@ class PublicRoute extends React.Component<any, {}>{
     [x: string]: any;
     constructor(props: any) {
         super(props);
-        console.log(props);
     }
 
     render() {

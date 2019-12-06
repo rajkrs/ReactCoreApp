@@ -5,7 +5,7 @@ export interface Message {
 }
 
 export interface ApiResponse<T> {
-     status: Status;
+    status: Status;
     messages: Message[];
     data: T;
 }

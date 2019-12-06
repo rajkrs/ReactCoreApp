@@ -15,8 +15,17 @@ namespace ReactCore.Api.Controllers
     {
         // POST: api/Login
         [HttpPost]
-        public ActionResult Post([FromBody] LoginReq loginRq) =>
-             Ok(new UserInfoRes { Id = 23, Name = "Raj Kumar", Address="New Delhi, 110092" });
+        public ActionResult Post([FromBody] LoginRequestDto loginRequestDto)
+        {
+            if (loginRequestDto.UserName == "abc" && loginRequestDto.Password == "123")
+            {
+                return Ok(new UserInfoRes { Id = 23, Name = "Raj Kumar", Address = "New Delhi, 110092" });
+            }
+            else {
+                return Unauthorized("Invalid credentials.");
+            }
+        }
+
 
         [HttpGet("helpline")]
         [Produces(typeof(string[]))]

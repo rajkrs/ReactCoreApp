@@ -9,6 +9,8 @@ import { Container, Row, Col, Form, FormGroup, Label, Input, Button, Dropdown, D
 
 //common
 import { ApiResponse } from '../../common/models/api_response.model';
+import { LoginRequestDto, LoginResponseDto } from './login.model';
+
 
 //module
 import * as styles from './login.component.css';
@@ -16,13 +18,15 @@ import { LoginService } from './login.service';
 
  
 
-class Login extends React.Component<any, any> {
+class Login  extends React.Component<any, any> {
     [x: string]: any;
     private loginService: LoginService;
 
     state: {
         userIsRequired: boolean,
         helpLineNumbers: string[]
+        loginRequest: LoginRequestDto,
+        loginResponse: LoginResponseDto
     };
 
     constructor(props) {
@@ -31,8 +35,11 @@ class Login extends React.Component<any, any> {
         this.state = {
             userIsRequired: true,
             helpLineNumbers: [],
+            loginRequest: new LoginRequestDto(),
+            loginResponse: null
         };
     }
+
 
     componentDidMount() {
         this.loginService.getHelpLine().then(response => {
@@ -43,6 +50,19 @@ class Login extends React.Component<any, any> {
         });
     }
 
+  
+    doLogin = () =>  {
+        console.log("You clicked on Login with", this.state.loginRequest);
+        this.loginService.login(this.state.loginRequest).then(response => {
+            this.setState({
+                loginResponse: response.data
+            });
+            console.log("Login Data", this.state.loginResponse);
+        });
+    }
+
+
+
     render() {
         return (
 
@@ -51,10 +71,12 @@ class Login extends React.Component<any, any> {
             <div class="container h-100;" className={styles.loginblue}>
 
                
-                {this.state.helpLineNumbers.map(number => (
+                {/*
+                    this.state.helpLineNumbers.map(number => (
                     <div className="alert alert-info">{number}</div>
-                        ))}
-                  
+                    ))
+                */}
+                 
 
 
                 <div class="row h-100 justify-content-center align-items-center">
@@ -65,16 +87,39 @@ class Login extends React.Component<any, any> {
                             <AvField name="userName" label="Username" type="text" errorMessage="Invalid Username" validate={{
                                 required: { value: this.state.userIsRequired },
                                 pattern: { value: '^[A-Za-z0-9]+$' },
-                                minLength: { value: 6 },
+                                minLength: { value: 3 },
                                 maxLength: { value: 16 }
-                            }} />
+                            }}
+                                onChange={e =>
+                                {
+                                    var value = e.target.value;
+                                    this.setState(prevState => ({
+                                        loginRequest: {
+                                            ...this.state.loginRequest,
+                                            UserName: value
+                                        }
+                                    }));
+                                }}
+                     />
+
                             <AvField name="password" label="Password" type="password" validate={{
                                 required: { value: true, errorMessage: 'Please enter password' },
                                 pattern: { value: '^[A-Za-z0-9]+$', errorMessage: 'Your name must be composed only with letter and numbers' },
-                                minLength: { value: 6, errorMessage: 'Your name must be between 6 and 16 characters' },
+                                minLength: { value: 3, errorMessage: 'Your name must be between 6 and 16 characters' },
                                 maxLength: { value: 16, errorMessage: 'Your name must be between 6 and 16 characters' }
-                            }} />
-                            <Button color="primary">Login</Button>
+                            }}
+                                onChange={e => {
+                                    var value = e.target.value;
+                                    this.setState(prevState => ({
+                                        loginRequest: {
+                                            ...this.state.loginRequest,
+                                            Password: value
+                                        }
+                                    }));
+                                }}
+                            />
+                            
+                            <Button color="primary" onClick={this.doLogin}>Login</Button>
                         </AvForm>
                         <hr/>
 

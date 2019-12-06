@@ -1,7 +1,7 @@
 import { ServiceClient } from '../../common/services/service_client.service';
 import { ApiResponse } from '../../common/models/api_response.model';
 
-import { LoginRequestDto } from './login.model';
+import { LoginRequestDto, LoginResponseDto } from './login.model';
 
 export class LoginService {
 
@@ -17,7 +17,8 @@ export class LoginService {
             .then(data => { return data as ApiResponse<string[]> });
     }
 
-    //login(loginReq: logi): Observable<ApiResponse<UserInfoRes>> {
-    //    return this.client.post<ApiResponse<UserInfoRes>>(this.serviceRoute, loginReq);
-    //}
+    login(loginRequest: LoginRequestDto) {
+        return this.client.Post(this.serviceRoute, loginRequest)
+            .then(data => { return data as ApiResponse<LoginResponseDto>});
+    }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AngCore.Api.Core.Middlewares;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +22,8 @@ namespace ReactCore.Api
 
             _ = services.AddMvc(options =>
             {
-                options.Filters.Add(typeof(ReactCore.Api.Core.Filters.CommonResponseFilter));
+                options.Filters.Add(typeof(ReactCore.Api.Core.Filters.CommonExceptionFilter));
+                options.Filters.Add(typeof(ReactCore.Api.Core.Filters.CommonResponseFormatFilter));
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
             .AddXmlSerializerFormatters();
 
@@ -48,7 +50,9 @@ namespace ReactCore.Api
             });
 
             app.UseCors("corspolicy");
-           
+
+            app.UseMiddleware<CommonResponseMiddleware>();
+
             app.UseMvc();
         }
     }

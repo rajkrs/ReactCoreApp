@@ -29,6 +29,7 @@ namespace ReactCore.Api.Controllers
         // public ActionResult<IEnumerable<string>> Get()
         public ActionResult<IEnumerable<string>> Get()
         {
+            //throw new Exception("My custom error");
             return new string[] { "value1", "value2" };
         }
 

@@ -67,7 +67,7 @@
     <TypeScriptCompile Include="src\app\common\services\service_client.service.tsx" />
     <TypeScriptCompile Include="src\app\public\error\404.component.tsx" />
     <TypeScriptCompile Include="src\app\public\login\login.component.tsx" />
-    <TypeScriptCompile Include="src\app\public\login\login.model.js" />
+    <TypeScriptCompile Include="src\app\public\login\login.model.tsx" />
     <TypeScriptCompile Include="src\app\public\login\login.service.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>

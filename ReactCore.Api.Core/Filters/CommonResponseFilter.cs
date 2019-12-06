@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
+using System.Net;
+using ReactCore.Api.Core.Enums;
+using System.Collections.Generic;
 
 namespace ReactCore.Api.Core.Filters
 {
-    public class CommonResponseFilter : IActionFilter
+    public class CommonResponseFormatFilter : IActionFilter
     {
         public void OnActionExecuting(ActionExecutingContext context)
         {
@@ -26,23 +29,35 @@ namespace ReactCore.Api.Core.Filters
 
             if (context.Result is ObjectResult objectResult)
             {
+                context.HttpContext.Response.StatusCode = objectResult.StatusCode?? 200;
+
                 if (
                     (objectResult.DeclaredType == null && typeof(ActionResult).Name == methodType.Name)
                     ||
                     (objectResult.DeclaredType != null && typeof(ActionResponse<>).Name != objectResult.DeclaredType?.Name)
                     )
                 {
-                    var formattedResponse = new ActionResponse<object>
+                    var formattedResponse = new ActionResponse<object>();
+
+                    if (context.HttpContext.Response.StatusCode == (int)HttpStatusCode.OK)
                     {
-                        Status = Enums.ResponseStatus.Success,
-                        Data = objectResult.Value
-                    }; ;
+                        formattedResponse.Status = Enums.ResponseStatus.Success;
+                        formattedResponse.Data = objectResult.Value;
+                    }
+                    else
+                    {
+                        formattedResponse.Status = Enums.ResponseStatus.Failure;
+                        formattedResponse.Messages = new List<Message> {
+                                new Message {
+                                    Code = MessageCode.Other_Error,
+                                    Type = MessageType.Error,
+                                    Value = (objectResult.Value).ToString()
+                                }
+                        };
+                    }
+                    
                     context.Result = new ObjectResult(formattedResponse);
                 }
-
-                var requestId = context.HttpContext.Request.Headers["id"];
-                var responseId = Guid.NewGuid().ToString();
-                context.HttpContext.Response.Headers.Add("id", responseId);
 
             }
         }

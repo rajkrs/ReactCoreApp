@@ -79435,6 +79435,29 @@ var ServiceClient = /** @class */ (function () {
             }
             else {
                 // handle error
+                console.log('error in Get,', thrown.message);
+            }
+        });
+    };
+    ServiceClient.prototype.Post = function (url, requestBody, requiredToken) {
+        if (requiredToken === void 0) { requiredToken = true; }
+        if (requiredToken) {
+            // this.interceptAuthentication();
+        }
+        return this.client.post(url, requestBody, {
+            cancelToken: this.request.token
+        })
+            .then(function (response) {
+            //console.log(response.data);
+            return response.data;
+        })
+            .catch(function (thrown) {
+            if (axios_1.default.isCancel(thrown)) {
+                console.log('request canceled', thrown.message);
+            }
+            else {
+                // handle error
+                console.log('error in Post,', thrown.message);
             }
         });
     };
@@ -79618,6 +79641,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 //core
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
@@ -79625,6 +79659,7 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 //UI
 var availity_reactstrap_validation_1 = __webpack_require__(/*! availity-reactstrap-validation */ "./node_modules/availity-reactstrap-validation/lib/index.js");
 var reactstrap_1 = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.es.js");
+var login_model_1 = __webpack_require__(/*! ./login.model */ "./src/app/public/login/login.model.tsx");
 //module
 var styles = __webpack_require__(/*! ./login.component.css */ "./src/app/public/login/login.component.css");
 var login_service_1 = __webpack_require__(/*! ./login.service */ "./src/app/public/login/login.service.tsx");
@@ -79632,10 +79667,21 @@ var Login = /** @class */ (function (_super) {
     __extends(Login, _super);
     function Login(props) {
         var _this = _super.call(this, props) || this;
+        _this.doLogin = function () {
+            console.log("You clicked on Login with", _this.state.loginRequest);
+            _this.loginService.login(_this.state.loginRequest).then(function (response) {
+                _this.setState({
+                    loginResponse: response.data
+                });
+                console.log("Login Data", _this.state.loginResponse);
+            });
+        };
         _this.loginService = new login_service_1.LoginService();
         _this.state = {
             userIsRequired: true,
             helpLineNumbers: [],
+            loginRequest: new login_model_1.LoginRequestDto(),
+            loginResponse: null
         };
         return _this;
     }
@@ -79649,8 +79695,8 @@ var Login = /** @class */ (function (_super) {
         });
     };
     Login.prototype.render = function () {
+        var _this = this;
         return (React.createElement("div", { class: "container h-100;", className: styles.loginblue },
-            this.state.helpLineNumbers.map(function (number) { return (React.createElement("div", { className: "alert alert-info" }, number)); }),
             React.createElement("div", { class: "row h-100 justify-content-center align-items-center" },
                 React.createElement("div", { class: "col-4" },
                     React.createElement("h2", null, "Sign In"),
@@ -79658,16 +79704,26 @@ var Login = /** @class */ (function (_super) {
                         React.createElement(availity_reactstrap_validation_1.AvField, { name: "userName", label: "Username", type: "text", errorMessage: "Invalid Username", validate: {
                                 required: { value: this.state.userIsRequired },
                                 pattern: { value: '^[A-Za-z0-9]+$' },
-                                minLength: { value: 6 },
+                                minLength: { value: 3 },
                                 maxLength: { value: 16 }
+                            }, onChange: function (e) {
+                                var value = e.target.value;
+                                _this.setState(function (prevState) { return ({
+                                    loginRequest: __assign({}, _this.state.loginRequest, { UserName: value })
+                                }); });
                             } }),
                         React.createElement(availity_reactstrap_validation_1.AvField, { name: "password", label: "Password", type: "password", validate: {
                                 required: { value: true, errorMessage: 'Please enter password' },
                                 pattern: { value: '^[A-Za-z0-9]+$', errorMessage: 'Your name must be composed only with letter and numbers' },
-                                minLength: { value: 6, errorMessage: 'Your name must be between 6 and 16 characters' },
+                                minLength: { value: 3, errorMessage: 'Your name must be between 6 and 16 characters' },
                                 maxLength: { value: 16, errorMessage: 'Your name must be between 6 and 16 characters' }
+                            }, onChange: function (e) {
+                                var value = e.target.value;
+                                _this.setState(function (prevState) { return ({
+                                    loginRequest: __assign({}, _this.state.loginRequest, { Password: value })
+                                }); });
                             } }),
-                        React.createElement(reactstrap_1.Button, { color: "primary" }, "Login")),
+                        React.createElement(reactstrap_1.Button, { color: "primary", onClick: this.doLogin }, "Login")),
                     React.createElement("hr", null),
                     React.createElement(react_router_dom_1.Link, { to: "/" }, "Home page"),
                     React.createElement("br", null),
@@ -79678,6 +79734,32 @@ var Login = /** @class */ (function (_super) {
     return Login;
 }(React.Component));
 exports.default = Login;
+
+
+/***/ }),
+
+/***/ "./src/app/public/login/login.model.tsx":
+/*!**********************************************!*\
+  !*** ./src/app/public/login/login.model.tsx ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var LoginRequestDto = /** @class */ (function () {
+    function LoginRequestDto() {
+    }
+    return LoginRequestDto;
+}());
+exports.LoginRequestDto = LoginRequestDto;
+var LoginResponseDto = /** @class */ (function () {
+    function LoginResponseDto() {
+    }
+    return LoginResponseDto;
+}());
+exports.LoginResponseDto = LoginResponseDto;
 
 
 /***/ }),
@@ -79700,6 +79782,10 @@ var LoginService = /** @class */ (function () {
     }
     LoginService.prototype.getHelpLine = function () {
         return this.client.Get(this.serviceRoute + "helpline")
+            .then(function (data) { return data; });
+    };
+    LoginService.prototype.login = function (loginRequest) {
+        return this.client.Post(this.serviceRoute, loginRequest)
             .then(function (data) { return data; });
     };
     return LoginService;
