@@ -19,6 +19,8 @@ export class LoginService {
 
     login(loginRequest: LoginRequestDto) {
         return this.client.Post(this.serviceRoute, loginRequest)
-            .then(data => { return data as ApiResponse<LoginResponseDto>});
+            .then(data => { return data as ApiResponse<LoginResponseDto> })
+            .catch(error => { return Promise.resolve(error.data as ApiResponse<LoginResponseDto>) })
+            ;
     }
 }

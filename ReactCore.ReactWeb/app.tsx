@@ -13,6 +13,8 @@ import {
 } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.css';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 import Home from './src/app/home';
 import Login from './src/app/public/login/login.component';

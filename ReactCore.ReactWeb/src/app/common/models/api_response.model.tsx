@@ -1,10 +1,12 @@
-export interface Message {
+import { Status, MessageType, MessageCode } from "../enums/api_response";
+
+export class Message {
     type: MessageType;
     code: MessageCode;
     value: string;
 }
 
-export interface ApiResponse<T> {
+export class ApiResponse<T> {
     status: Status;
     messages: Message[];
     data: T;

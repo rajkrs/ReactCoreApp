@@ -1,15 +1,15 @@
-enum Status {
+export enum Status {
     failoure = 0,
     success = 1
 }
 
-enum MessageType {
+export enum MessageType {
     Info = 0,
     Warn = 1,
     Error = 2
 }
 
-enum MessageCode {
+export enum MessageCode {
     //Error Code
     Other_Error = 1,
     Valiadtion_Error = 2,

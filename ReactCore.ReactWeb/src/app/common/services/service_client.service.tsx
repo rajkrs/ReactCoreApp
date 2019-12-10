@@ -10,7 +10,7 @@ import axios, {
     Canceler
 } from 'axios';
 
-import { ServiceProviderConst } from '../constants/service_provider_const'
+import { ServiceProviderConst } from '../constants/service_provider'
 
 
 const httpOptions = {
@@ -91,14 +91,17 @@ export class ServiceClient {
                 //console.log(response.data);
                 return response.data;
             })
-            .catch(function (thrown) {
-                if (axios.isCancel(thrown)) {
-                    console.log('request canceled', thrown.message);
+            .catch(error => {
+
+                if (axios.isCancel(error)) {
+                    console.log('request canceled', error.message);
                 }
                 else {
                     // handle error
-                    console.log('error in Post,', thrown.message);
+                    console.log('error in Post,', error.message);
                 }
+                console.log('error.response.data', error.response.data);
+                return Promise.reject(error.response);
             });
 
 

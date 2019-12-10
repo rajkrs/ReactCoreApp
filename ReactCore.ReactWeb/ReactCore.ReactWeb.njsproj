@@ -36,7 +36,8 @@
     <Content Include="server.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
-    <Content Include="src\app\common\constants\service_provider_const.tsx" />
+    <Content Include="src\app\common\component\toster\alert.component.css" />
+    <Content Include="src\app\common\constants\service_provider.tsx" />
     <Content Include="src\app\common\enums\api_response.tsx" />
     <Content Include="src\app\home.tsx">
       <SubType>Code</SubType>
@@ -59,6 +60,8 @@
     <TypeScriptCompile Include="app.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\app\common\component\toster\alert.tsx" />
+    <TypeScriptCompile Include="src\app\common\constants\alert.tsx" />
     <TypeScriptCompile Include="src\app\public\about-us\about-us.component.tsx" />
     <TypeScriptCompile Include="src\app\common\component\route\AdminRoute.Component.tsx" />
     <TypeScriptCompile Include="src\app\common\component\route\AdminRoute.tsx" />
@@ -76,6 +79,7 @@
   <ItemGroup>
     <Folder Include="dist\" />
     <Folder Include="src\" />
+    <Folder Include="src\app\common\component\toster\" />
     <Folder Include="src\app\common\component\route\" />
     <Folder Include="src\app\common\models\" />
     <Folder Include="src\app\common\enums\" />

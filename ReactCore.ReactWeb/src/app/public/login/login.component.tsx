@@ -6,10 +6,13 @@ import { Link } from 'react-router-dom';
 //UI
 import { AvForm, AvField, AvGroup, AvInput, AvFeedback, AvRadioGroup, AvRadio } from 'availity-reactstrap-validation';
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 //common
 import { ApiResponse } from '../../common/models/api_response.model';
 import { LoginRequestDto, LoginResponseDto } from './login.model';
+import { Toster } from '../../common/component/toster/alert';
 
 
 //module
@@ -54,10 +57,16 @@ class Login  extends React.Component<any, any> {
     doLogin = () =>  {
         console.log("You clicked on Login with", this.state.loginRequest);
         this.loginService.login(this.state.loginRequest).then(response => {
-            this.setState({
-                loginResponse: response.data
-            });
-            console.log("Login Data", this.state.loginResponse);
+            if (response.status == 1) {
+                this.setState({
+                    loginResponse: response.data
+                });
+                console.log("Login Data", this.state.loginResponse);
+                Toster.success("Login sucessfully!");
+            }
+            else {
+                Toster.notify(response.messages);
+            }
         });
     }
 
@@ -69,6 +78,7 @@ class Login  extends React.Component<any, any> {
             
 
             <div class="container h-100;" className={styles.loginblue}>
+                <ToastContainer />
 
                
                 {/*
