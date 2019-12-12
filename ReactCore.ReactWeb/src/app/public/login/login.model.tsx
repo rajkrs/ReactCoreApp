@@ -8,6 +8,4 @@ export class LoginResponseDto {
     Name: string;
     Address : string
 }
-
-
  

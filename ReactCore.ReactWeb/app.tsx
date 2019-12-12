@@ -1,7 +1,9 @@
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import PublicRoute from './src/app/common/component/route/PublicRoute';
-import PublicRouteComponent from './src/app/common/component/route/PublicRoute.Component';
+import CustomRoute from './src/app/common/components/route/CustomRoute';
+import CustomRouteComponent from './src/app/common/components/route/CustomRoute.Component';
+
 
 import {
     BrowserRouter,
@@ -18,19 +20,37 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Home from './src/app/home';
 import Login from './src/app/public/login/login.component';
+import { ToastContainer } from 'react-toastify';
+
+
+
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxThunk from 'redux-thunk';
+
+import reducers from './src/app/common/reducers';
+
 
 
 const App = () => {
+
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+
+
     return (
-        <BrowserRouter>
+        <Provider store={store}>
+            <BrowserRouter>
                 <Switch>
-                <Route path="/" component={Home} exact />
-                <Route path="/login" component={Login} exact />
-                <PublicRoute path="" component={PublicRouteComponent} />
-                <Redirect to="/" />
+                    <Route path="/" component={Home} exact />
+                    <Route path="/login" component={Login} exact />
+
+                    <CustomRoute path="" component={CustomRouteComponent} exact />
+                    <Redirect to="/" />
                 </Switch>
-        </BrowserRouter>
+                <ToastContainer />
+            </BrowserRouter>
+        </Provider>
     );
 }
 
-ReactDOM.render(<App/>, document.getElementById('root')); 
+ReactDOM.render(<App />, document.getElementById('root')); 

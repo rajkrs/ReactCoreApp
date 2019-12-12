@@ -2,6 +2,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+
 
 //UI
 import { AvForm, AvField, AvGroup, AvInput, AvFeedback, AvRadioGroup, AvRadio } from 'availity-reactstrap-validation';
@@ -12,16 +15,17 @@ import { ToastContainer, toast } from 'react-toastify';
 //common
 import { ApiResponse } from '../../common/models/api_response.model';
 import { LoginRequestDto, LoginResponseDto } from './login.model';
-import { Toster } from '../../common/component/toster/alert';
+import { Toster } from '../../common/components/toster/alert';
 
 
 //module
 import * as styles from './login.component.css';
 import { LoginService } from './login.service';
+import { doLogin } from './login.action';
 
- 
 
-class Login  extends React.Component<any, any> {
+
+class Login extends React.Component<any, any> {
     [x: string]: any;
     private loginService: LoginService;
 
@@ -41,7 +45,15 @@ class Login  extends React.Component<any, any> {
             loginRequest: new LoginRequestDto(),
             loginResponse: null
         };
+
+        this.handleInvalidSubmit = this.handleInvalidSubmit.bind(this);
     }
+
+    handleInvalidSubmit(event, errors, values) {
+
+    }
+
+
 
 
     componentDidMount() {
@@ -53,55 +65,61 @@ class Login  extends React.Component<any, any> {
         });
     }
 
-  
-    doLogin = () =>  {
-        console.log("You clicked on Login with", this.state.loginRequest);
-        this.loginService.login(this.state.loginRequest).then(response => {
-            if (response.status == 1) {
-                this.setState({
-                    loginResponse: response.data
-                });
-                console.log("Login Data", this.state.loginResponse);
-                Toster.success("Login sucessfully!");
-            }
-            else {
-                Toster.notify(response.messages);
-            }
-        });
+    componentDidUpdate(preProps) {
+        if (this.props.isLoginStarted) {
+             //Disable
+        }
+
+        if ((preProps.loginSucessResponse != this.props.loginSucessResponse)
+            && this.props.loginSucessResponse != null) {
+            Toster.success('Login Sucessfully!');
+            this.props.history.push("/profile");
+        }
+
+        if ((preProps.loginFailourResponse != this.props.loginFailourResponse)
+            && this.props.loginFailourResponse != null) {
+
+            Toster.notify(this.props.loginFailourResponse.messages);
+        }
+
     }
 
 
 
+    onLoginPress = (e) => {
+        console.log('onLoginPress', e);
+        this.props.doLogin(this.state.loginRequest);
+    }
+
     render() {
+        console.log('loginServiceResponse props', this.props.loginServiceResponse);
         return (
 
-            
+
 
             <div class="container h-100;" className={styles.loginblue}>
-                <ToastContainer />
 
-               
+
                 {/*
                     this.state.helpLineNumbers.map(number => (
                     <div className="alert alert-info">{number}</div>
                     ))
                 */}
-                 
+
 
 
                 <div class="row h-100 justify-content-center align-items-center">
                     <div class="col-4">
                         <h2>Sign In</h2>
 
-                        <AvForm>
+                        <AvForm onInvalidSubmit={this.handleInvalidSubmit} onValidSubmit={this.onLoginPress}>
                             <AvField name="userName" label="Username" type="text" errorMessage="Invalid Username" validate={{
                                 required: { value: this.state.userIsRequired },
                                 pattern: { value: '^[A-Za-z0-9]+$' },
                                 minLength: { value: 3 },
                                 maxLength: { value: 16 }
                             }}
-                                onChange={e =>
-                                {
+                                onChange={e => {
                                     var value = e.target.value;
                                     this.setState(prevState => ({
                                         loginRequest: {
@@ -110,7 +128,7 @@ class Login  extends React.Component<any, any> {
                                         }
                                     }));
                                 }}
-                     />
+                            />
 
                             <AvField name="password" label="Password" type="password" validate={{
                                 required: { value: true, errorMessage: 'Please enter password' },
@@ -128,13 +146,14 @@ class Login  extends React.Component<any, any> {
                                     }));
                                 }}
                             />
-                            
-                            <Button color="primary" onClick={this.doLogin}>Login</Button>
+
+                            <Button color="primary" disabled={this.props.isLoginStarted}>Login</Button>
+
                         </AvForm>
-                        <hr/>
+                        <hr />
 
                         <Link to="/">Home page</Link>
-                        <br/>
+                        <br />
                         <Link to="/about-us" >About-us</Link>
                         <br />
                         <Link to="/contact-us">Contact-us</Link>
@@ -146,5 +165,35 @@ class Login  extends React.Component<any, any> {
         );
     }
 }
-export default  Login ;
+
+
+const mapStateToProps = ({ login }) => {
+    const {
+        isLoginStarted,
+        loginSucessResponse,
+        loginFailourResponse
+    } = login;
+    return {
+        isLoginStarted,
+        loginSucessResponse,
+        loginFailourResponse
+    };
+};
+
+//To call do login function 
+//const mapDispatchToProps = () => {
+//    return {
+//        doLogin: doLogin
+//    }
+//}
+
+
+//export default connect(mapStateToProps, mapDispatchToProps)(Login);
+//OR
+
+export default connect(mapStateToProps, { doLogin })(Login); 
+
+
+
+
 

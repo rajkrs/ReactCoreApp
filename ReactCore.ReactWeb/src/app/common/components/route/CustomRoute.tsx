@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
 
- 
-class PublicRoute extends React.Component<any, {}>{
+
+class CustomRoute extends React.Component<any, {}>{
     [x: string]: any;
     constructor(props: any) {
         super(props);
@@ -14,12 +14,12 @@ class PublicRoute extends React.Component<any, {}>{
         return (
             <>
                 <Route {...rest}
-                render={props => {
+                    render={props => {
                         return <Component {...props} />
-                }} />
+                    }} />
             </>
         )
     }
 }
 
-export default PublicRoute;
+export default CustomRoute;

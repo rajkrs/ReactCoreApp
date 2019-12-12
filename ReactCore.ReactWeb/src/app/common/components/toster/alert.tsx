@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { toast } from 'react-toastify';
 import { Message } from '../../models/api_response.model';
-import * as styles from '../../component/toster/alert.component.css';
+import * as styles from '../../components/toster/alert.component.css';
 import { AlertConst } from '../../constants/alert';
 import { MessageType } from '../../enums/api_response';
 
@@ -57,6 +57,7 @@ export class Toster {
         });
         return tostId;
     }
+
 
 
     static dismiss = (toastId: any) => toast.dismiss(toastId);

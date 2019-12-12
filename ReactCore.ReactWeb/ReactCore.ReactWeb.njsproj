@@ -36,13 +36,14 @@
     <Content Include="server.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
-    <Content Include="src\app\common\component\toster\alert.component.css" />
+    <Content Include="src\app\common\components\toster\alert.component.css" />
     <Content Include="src\app\common\constants\service_provider.tsx" />
     <Content Include="src\app\common\enums\api_response.tsx" />
     <Content Include="src\app\home.tsx">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\app\public\login\login.component.css" />
+    <Content Include="src\app\public\login\login.reducer.tsx" />
     <Content Include="src\app\user\user-details-view.tsx">
       <SubType>Code</SubType>
     </Content>
@@ -52,7 +53,6 @@
     <Content Include="src\app\user\user-manage.tsx">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="src\app\common\component\route\PublicRoute.tsx" />
     <Content Include="tsconfig.json" />
     <Content Include="webpack-config.js" />
   </ItemGroup>
@@ -60,16 +60,20 @@
     <TypeScriptCompile Include="app.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\app\common\component\toster\alert.tsx" />
+    <TypeScriptCompile Include="src\app\common\components\toster\alert.tsx" />
     <TypeScriptCompile Include="src\app\common\constants\alert.tsx" />
+    <TypeScriptCompile Include="src\app\common\reducers\index.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\app\public\about-us\about-us.component.tsx" />
-    <TypeScriptCompile Include="src\app\common\component\route\AdminRoute.Component.tsx" />
-    <TypeScriptCompile Include="src\app\common\component\route\AdminRoute.tsx" />
-    <TypeScriptCompile Include="src\app\common\component\route\PublicRoute.Component.tsx" />
+    <TypeScriptCompile Include="src\app\common\components\route\CustomRoute.Component.tsx" />
+    <TypeScriptCompile Include="src\app\common\components\route\CustomRoute.tsx" />
     <TypeScriptCompile Include="src\app\common\models\api_response.model.tsx" />
     <TypeScriptCompile Include="src\app\common\services\service_client.service.tsx" />
     <TypeScriptCompile Include="src\app\public\error\404.component.tsx" />
+    <TypeScriptCompile Include="src\app\public\login\login.action.tsx" />
     <TypeScriptCompile Include="src\app\public\login\login.component.tsx" />
+    <TypeScriptCompile Include="src\app\public\login\login.constant.tsx" />
     <TypeScriptCompile Include="src\app\public\login\login.model.tsx" />
     <TypeScriptCompile Include="src\app\public\login\login.service.tsx">
       <SubType>Code</SubType>
@@ -79,12 +83,13 @@
   <ItemGroup>
     <Folder Include="dist\" />
     <Folder Include="src\" />
-    <Folder Include="src\app\common\component\toster\" />
-    <Folder Include="src\app\common\component\route\" />
+    <Folder Include="src\app\common\components\toster\" />
+    <Folder Include="src\app\common\components\route\" />
     <Folder Include="src\app\common\models\" />
     <Folder Include="src\app\common\enums\" />
     <Folder Include="src\app\common\constants\" />
-    <Folder Include="src\app\common\component\" />
+    <Folder Include="src\app\common\components\" />
+    <Folder Include="src\app\common\reducers\" />
     <Folder Include="src\app\common\services\" />
     <Folder Include="src\app\public\login\" />
     <Folder Include="src\app\common\" />

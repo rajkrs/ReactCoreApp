@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ReactCore.Api.ViewModel.User;
 using Microsoft.AspNetCore.Mvc;
+using ReactCore.Api.ViewModel.Account;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,8 +15,8 @@ namespace ReactCore.Api.Controllers
     {
         // GET api/<controller>/5
         [HttpGet("{id}")]
-        public UserInfoRes Get(int id) =>
-             new UserInfoRes { Id = id, Name = "Raj Kumar", Address = "New Delhi, 110092"};
+        public LoginResponseDto Get(int id) =>
+             new LoginResponseDto { Id = id, Name = "Raj Kumar", Address = "New Delhi, 110092"};
 
     }
 }

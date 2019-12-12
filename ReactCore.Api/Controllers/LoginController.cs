@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ReactCore.Api.ViewModel.Account;
-using ReactCore.Api.ViewModel.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +18,7 @@ namespace ReactCore.Api.Controllers
         {
             if (loginRequestDto.UserName == "abc" && loginRequestDto.Password == "123")
             {
-                return Ok(new UserInfoRes { Id = 23, Name = "Raj Kumar", Address = "New Delhi, 110092" });
+                return Ok(new LoginResponseDto { Id = 23, Name = "Raj Kumar", Address = "New Delhi, 110092" });
             }
             else {
                 return Unauthorized("Invalid credentials.");
