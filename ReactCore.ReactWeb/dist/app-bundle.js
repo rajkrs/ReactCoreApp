@@ -9818,7 +9818,7 @@ exports.locals = {
 
 exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "._225s-OVzyV3wMaOSsFhy0z{color:DodgerBlue}\n", ""]);
+exports.push([module.i, "._225s-OVzyV3wMaOSsFhy0z{color:cornflowerblue}\n", ""]);
 // Exports
 exports.locals = {
 	"loginblue": "_225s-OVzyV3wMaOSsFhy0z"
@@ -85011,6 +85011,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 var about_us_component_1 = __webpack_require__(/*! ../../../public/about-us/about-us.component */ "./src/app/public/about-us/about-us.component.tsx");
+var history_1 = __webpack_require__(/*! ../../../public/history */ "./src/app/public/history/index.tsx");
 var user_details_view_1 = __webpack_require__(/*! ../../../user/user-details-view */ "./src/app/user/user-details-view.tsx");
 var _404_component_1 = __webpack_require__(/*! ../../../public/error/404.component */ "./src/app/public/error/404.component.tsx");
 var CustomRouteComponent = /** @class */ (function (_super) {
@@ -85021,6 +85022,7 @@ var CustomRouteComponent = /** @class */ (function (_super) {
     CustomRouteComponent.prototype.render = function () {
         return (React.createElement(react_router_dom_1.Switch, null,
             React.createElement(react_router_dom_1.Route, { path: this.props.match.path + "about-us", exact: true, component: about_us_component_1.default }),
+            React.createElement(react_router_dom_1.Route, { path: this.props.match.path + "history", exact: true, component: history_1.default }),
             React.createElement(react_router_dom_1.Route, { path: this.props.match.path + "profile", exact: true, component: user_details_view_1.default }),
             React.createElement(react_router_dom_1.Route, { path: this.props.match.path + ":module", exact: true, component: _404_component_1.default })));
     };
@@ -85526,6 +85528,53 @@ exports.default = Error404;
 
 /***/ }),
 
+/***/ "./src/app/public/history/index.tsx":
+/*!******************************************!*\
+  !*** ./src/app/public/history/index.tsx ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var History = /** @class */ (function (_super) {
+    __extends(History, _super);
+    function History(props) {
+        var _this = _super.call(this, props) || this;
+        var module = _this.props.match.params.module;
+        _this.state = {
+            pageUrl: module
+        };
+        console.log('urlc', _this.state.pageUrl);
+        return _this;
+    }
+    History.prototype.render = function () {
+        return (React.createElement("div", { class: "container h-100 d-flex justify-content-center" },
+            React.createElement("div", { class: "my-auto" },
+                React.createElement("h1", null, "History 2"))));
+    };
+    return History;
+}(React.Component));
+exports.default = History;
+
+
+/***/ }),
+
 /***/ "./src/app/public/login/login.action.tsx":
 /*!***********************************************!*\
   !*** ./src/app/public/login/login.action.tsx ***!
@@ -85708,7 +85757,9 @@ var Login = /** @class */ (function (_super) {
                     React.createElement("br", null),
                     React.createElement(react_router_dom_1.Link, { to: "/about-us" }, "About-us"),
                     React.createElement("br", null),
-                    React.createElement(react_router_dom_1.Link, { to: "/contact-us" }, "Contact-us")))));
+                    React.createElement(react_router_dom_1.Link, { to: "/contact-us" }, "Contact-us"),
+                    React.createElement("br", null),
+                    React.createElement(react_router_dom_1.Link, { to: "/history" }, "History")))));
     };
     return Login;
 }(React.Component));

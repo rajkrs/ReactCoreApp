@@ -157,6 +157,8 @@ class Login extends React.Component<any, any> {
                         <Link to="/about-us" >About-us</Link>
                         <br />
                         <Link to="/contact-us">Contact-us</Link>
+                        <br />
+                        <Link to="/history">History</Link>
                     </div>
 
                 </div>

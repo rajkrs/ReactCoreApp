@@ -32,6 +32,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="FolderProfile.pubxml" />
     <Content Include="index.html" />
     <Content Include="server.js" />
     <Content Include="package.json" />
