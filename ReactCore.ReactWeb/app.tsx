@@ -6,7 +6,7 @@ import CustomRouteComponent from './src/app/common/components/route/CustomRoute.
 
 
 import {
-    BrowserRouter,
+    BrowserRouter, 
     Switch,
     Route,
     Link,

@@ -84985,6 +84985,33 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./src/app/common/components/DefaultLayout/DefaultLayout.js":
+/*!******************************************************************!*\
+  !*** ./src/app/common/components/DefaultLayout/DefaultLayout.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ "./src/app/common/components/DefaultLayout/index.tsx":
+/*!***********************************************************!*\
+  !*** ./src/app/common/components/DefaultLayout/index.tsx ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var DefaultLayout_1 = __webpack_require__(/*! ./DefaultLayout */ "./src/app/common/components/DefaultLayout/DefaultLayout.js");
+exports.default = DefaultLayout_1.default;
+
+
+/***/ }),
+
 /***/ "./src/app/common/components/route/CustomRoute.Component.tsx":
 /*!*******************************************************************!*\
   !*** ./src/app/common/components/route/CustomRoute.Component.tsx ***!
@@ -85419,17 +85446,20 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+var DefaultLayout_1 = __webpack_require__(/*! ../app/common/components/DefaultLayout */ "./src/app/common/components/DefaultLayout/index.tsx");
 var Home = /** @class */ (function (_super) {
     __extends(Home, _super);
     function Home() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Home.prototype.render = function () {
-        return (React.createElement("div", { class: "loginblue" },
-            React.createElement("h2", null, "Wlcome Home!"),
-            React.createElement("p", null, "Get all basic info about app here."),
-            React.createElement(react_router_dom_1.Link, { to: "/login" }, "Click here to Login")));
+        return (React.createElement(DefaultLayout_1.default, null)
+        // <div class="loginblue">
+        //     <h2>Wlcome Home!</h2>
+        //     <p>Get all basic info about app here.</p>
+        //     <Link to="/login">Click here to Login</Link>
+        // </div>
+        );
     };
     return Home;
 }(React.Component));

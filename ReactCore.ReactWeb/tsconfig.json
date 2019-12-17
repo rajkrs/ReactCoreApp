@@ -6,6 +6,7 @@
     "removeComments": false,
     "sourceMap": true,
     "jsx": "react",
+    "outDir": "./build",
     "lib": [
       "dom",
       "es6",
@@ -14,12 +15,25 @@
     ],
     "target": "es5",
     "allowSyntheticDefaultImports": true,
-    "plugins": [ { "name": "typescript-plugin-css-modules" } ]
+    "plugins": [ { "name": "typescript-plugin-css-modules" } ],
+    "moduleResolution": "node",
+    "skipLibCheck": true
   },
+  "compileOnSave": true,
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "build",
+    "coverage",
+    "**/*.spec.ts",
+    "**/*.test.*"
   ],
-  "include": [ "src" ],
+  "include": [
+    "types/*",
+    "src",
+    "src/**/*",
+    "src/**/**/*",
+    "src/**/**/**/*"
+  ],
   "files": [
     "app.tsx"
   ]
